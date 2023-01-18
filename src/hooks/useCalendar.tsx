@@ -1,8 +1,5 @@
 import { useState } from 'react';
-import { usePublicHolidays } from './usePublicHolidays';
-import { useEvents } from './useEvents';
-import { useDays } from './useDays';
-import { useFilters } from './useFilters';
+import { useEvents, useDays, useFilters, usePublicHolidays } from './index';
 
 export const useCalendar = () => {
     const [month, setMonth] = useState(new Date().getMonth());

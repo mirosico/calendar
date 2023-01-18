@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import { ButtonGroup, Button } from '@mui/material';
 import { StyledCalendarHeader } from './styles';
 import { getMonthName } from '../../utils';
-import { useSaveAsImage } from '../../hooks/useSaveAsImage';
+import { useSaveAsImage } from '../../hooks';
 
 interface CalendarHeaderProps {
     month: number;

@@ -7,7 +7,6 @@ export const StyledSidebar = styled.div`
     align-items: center;
     width: 200px;
     height: 100%;
-    padding: 0;
     margin: 0;
     background-color: #fff;
     border-right: 1px solid #f5f5f5;

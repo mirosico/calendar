@@ -3,7 +3,7 @@ import { CalendarHeader } from './CalendarHeader';
 import { CalendarBody } from './CalendarBody';
 import { SideBar } from '../sidebar/SideBar';
 import { StyledCalendar } from './styles';
-import { useCalendar } from '../../hooks/useCalendar';
+import { useCalendar } from '../../hooks';
 
 export const Calendar = () => {
     const { month, year, setMonth, setYear, filter, addEvent, onDragDay, exportEventsToJSON, importEventsFromJSON } =
