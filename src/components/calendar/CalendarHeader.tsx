@@ -3,26 +3,27 @@ import { ButtonGroup, Button } from '@mui/material';
 import { StyledCalendarHeader } from './styles';
 import { getMonthName } from '../../utils';
 import { useSaveAsImage } from '../../hooks';
+import { MonthYear } from '../../constants';
 
 interface CalendarHeaderProps {
-    month: number;
-    year: number;
-    setMonth: (month: number) => void;
-    setYear: (year: number) => void;
+    currentMonthYear: MonthYear;
+    setCurrentMonthYear: (monthYear: MonthYear) => void;
     exportEventsToJSON: () => void;
     importEventsFromJSON: (file: File) => void;
 }
 
 export const CalendarHeader: React.FC<CalendarHeaderProps> = ({
-    month,
-    setMonth,
-    year,
-    setYear,
+    currentMonthYear,
+    setCurrentMonthYear,
     exportEventsToJSON,
     importEventsFromJSON,
 }) => {
     const hiddenInput = useRef<null | HTMLInputElement>(null);
-    const { saveCalendarImage } = useSaveAsImage();
+    const saveCalendarImage = useSaveAsImage();
+
+    const { month, year } = currentMonthYear;
+
+    const monthName = getMonthName(month);
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files) {
@@ -47,29 +48,25 @@ export const CalendarHeader: React.FC<CalendarHeaderProps> = ({
     const handleSave = () => {
         saveCalendarImage(document.body.querySelector('#calendar') as HTMLDivElement);
     };
-    const monthName = getMonthName(month);
 
     const handlePrevMonth = () => {
         if (month === 0) {
-            setMonth(11);
-            setYear(year - 1);
+            setCurrentMonthYear({ month: 11, year: year - 1 });
         } else {
-            setMonth(month - 1);
+            setCurrentMonthYear({ month: month - 1, year });
         }
     };
 
     const handleNextMonth = () => {
         if (month === 11) {
-            setMonth(0);
-            setYear(year + 1);
+            setCurrentMonthYear({ month: 0, year: year + 1 });
         } else {
-            setMonth(month + 1);
+            setCurrentMonthYear({ month: month + 1, year });
         }
     };
 
     const handleCurrentMonth = () => {
-        setMonth(new Date().getMonth());
-        setYear(new Date().getFullYear());
+        setCurrentMonthYear({ month: new Date().getMonth(), year: new Date().getFullYear() });
     };
 
     return (

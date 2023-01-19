@@ -1,7 +1,8 @@
 import React from 'react';
-import { Event as IEvent } from '../../constants';
 import { StyledEventInfo } from './styles';
-import { LabelList } from '../labels/LabelList';
+import { LabelList } from '../labels';
+
+import { Event as IEvent } from '../../constants';
 
 interface EventInfoProps {
     event: IEvent;

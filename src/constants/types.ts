@@ -63,5 +63,10 @@ export interface Filter {
     setFilter: React.Dispatch<React.SetStateAction<string>>;
     checkBoxes: CheckBox[];
     setCheckBoxes: React.Dispatch<React.SetStateAction<CheckBox[]>>;
-    filteredDays: Day[][];
+    filteredDays: Day[];
+}
+
+export interface MonthYear {
+    month: number;
+    year: number;
 }

@@ -1,6 +1,7 @@
 import React from 'react';
-import { Label as ILabel } from '../../constants';
 import { StyledLabel } from './styles';
+
+import { Label as ILabel } from '../../constants';
 
 interface LabelProps {
     label: ILabel;

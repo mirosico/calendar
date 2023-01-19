@@ -27,5 +27,5 @@ export const useSaveAsImage = () => {
         link.click();
         document.body.removeChild(link);
     };
-    return { saveCalendarImage };
+    return saveCalendarImage;
 };

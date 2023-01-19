@@ -1,12 +1,12 @@
 import React from 'react';
-import { Day, Event } from '../../constants';
 import { Droppable } from 'react-beautiful-dnd';
-import { CellBody, CellHeader, StyledCell } from './styles';
-import { EventList } from '../events/EventList';
-import { HolidayList } from '../holidays/HolidayList';
-import { useModal } from '../../context/modal-context';
-import { CreateEvent } from '../events/CreateEvent';
 import Button from '@mui/material/Button';
+import { CellBody, CellHeader, StyledCell } from './styles';
+import { HolidayList } from '../holidays/HolidayList';
+import { EventList, CreateEvent } from '../events';
+
+import { Day, Event } from '../../constants';
+import { useModal } from '../../context/modal-context';
 
 interface CellProps {
     day: Day;

@@ -1,7 +1,8 @@
 import React from 'react';
-import { Label as ILabel } from '../../constants';
-import { StyledLabelList } from './styles';
 import { Label } from './Label';
+import { StyledLabelList } from './styles';
+
+import { Label as ILabel } from '../../constants';
 
 interface LabelListProps {
     labels: ILabel[];

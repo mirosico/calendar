@@ -1,8 +1,9 @@
 import React from 'react';
-import { StyledFilter } from './styles';
-import { Filter as IFilter } from '../../constants';
-import { CheckBoxes } from './CheckBoxes';
 import TextField from '@mui/material/TextField';
+import { CheckBoxes } from './CheckBoxes';
+import { StyledFilter } from './styles';
+
+import { Filter as IFilter } from '../../constants';
 
 interface FilterProps {
     filter: IFilter;

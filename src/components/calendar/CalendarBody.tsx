@@ -3,17 +3,16 @@ import { DragDropContext } from 'react-beautiful-dnd';
 import { Day, weekDays, Event } from '../../constants';
 import { StyledCalendarBody } from './styles';
 import { Cell } from '../cell/Cell';
+import { getDaysByWeekArray, isWeekend } from '../../utils';
 
 interface CalendarProps {
-    filteredDays: Day[][]; // filteredDays is a 2D array of days
+    filteredDays: Day[];
     onDragDay: (result: any) => void;
     addEvent: (event: Event) => void;
 }
 
 export const CalendarBody: React.FC<CalendarProps> = ({ filteredDays, onDragDay, addEvent }) => {
-    const isWeekend = (dayIndex: number) => {
-        return dayIndex === 6 || dayIndex === 5;
-    };
+    const filteredDaysByWeeks = getDaysByWeekArray(filteredDays);
 
     return (
         <StyledCalendarBody id="calendar">
@@ -28,7 +27,7 @@ export const CalendarBody: React.FC<CalendarProps> = ({ filteredDays, onDragDay,
             </thead>
             <tbody>
                 <DragDropContext onDragEnd={onDragDay}>
-                    {filteredDays.map((week, index) => (
+                    {filteredDaysByWeeks.map((week, index) => (
                         <tr key={index}>
                             {week.map((day) => {
                                 if (!day.day) {

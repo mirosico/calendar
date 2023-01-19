@@ -4,7 +4,7 @@ import { Day, Event, Label } from '../../constants';
 import { generateEventUid } from '../../utils';
 import { StyledCreateEvent } from './styles';
 import { CreateLabel, defaultLabel } from './CreateLabel';
-import { LabelList } from '../labels/LabelList';
+import { LabelList } from '../labels';
 
 interface CreateEventProps {
     day: Day;

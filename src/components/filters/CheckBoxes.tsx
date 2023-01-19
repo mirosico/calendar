@@ -1,8 +1,9 @@
 import React from 'react';
 import { FormGroup, FormControlLabel, Checkbox, FormControl, FormLabel } from '@mui/material';
-import { CheckBox } from '../../constants';
+import { Label } from '../labels';
 import { StyledCheckBoxes } from './styles';
-import { Label } from '../labels/Label';
+
+import { CheckBox } from '../../constants';
 
 interface CheckBoxesProps {
     checkBoxes: CheckBox[];

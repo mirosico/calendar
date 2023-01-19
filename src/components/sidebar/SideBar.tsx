@@ -1,7 +1,8 @@
 import React from 'react';
-import { StyledSidebar } from './styles';
-import { Filter as IFilter } from '../../constants';
 import { Filter } from '../filters/Filter';
+import { StyledSidebar } from './styles';
+
+import { Filter as IFilter } from '../../constants';
 
 interface SideBarProps {
     filter: IFilter;

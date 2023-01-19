@@ -1,9 +1,10 @@
 import React from 'react';
 import Chip from '@mui/material/Chip';
-import { Event } from '../../constants';
 import { StyledEvent } from '../common';
-import { EventInfo } from '../events/EventInfo';
+import { EventInfo } from '../events';
+
 import { useModal } from '../../context/modal-context';
+import { Event } from '../../constants';
 
 interface HolidayProps {
     holiday: Event;

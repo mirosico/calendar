@@ -41,42 +41,43 @@ const getDaysByWeekArray = (days: Day[]): Day[][] => {
     return daysByWeekArray;
 };
 
+const compareTwoDates = (date1: Date, date2: Date) => {
+    return (
+        date1.getDate() === date2.getDate() &&
+        date1.getMonth() === date2.getMonth() &&
+        date1.getFullYear() === date2.getFullYear()
+    );
+};
+
+const isWeekend = (dayIndex: number) => {
+    return dayIndex === 6 || dayIndex === 5;
+};
+
 const getDays = (month: number, year: number, publicHolidays: PublicHoliday[], events: Event[]): Day[] => {
     const monthDays = getMonthDays(month, year);
 
     return monthDays.map((day, index) => {
         const weekDayIndex = index % 7;
-        const publicHolidaysForDay = publicHolidays
-            .filter((publicHoliday) => {
-                const publicHolidayDate = new Date(publicHoliday.date);
-                return (
-                    publicHolidayDate.getDate() === day &&
-                    publicHolidayDate.getMonth() === month &&
-                    publicHolidayDate.getFullYear() === year
-                );
-            })
-            .map((publicHoliday) => {
-                return {
-                    id: publicHoliday.name,
-                    title: publicHoliday.name,
-                    description: publicHoliday.localName || publicHoliday.name,
-                    date: new Date(publicHoliday.date),
-                    labels: [],
-                };
-            });
-        const eventsForDay = events.filter((event) => {
-            const eventDate = event.date;
-            return eventDate.getDate() === day && eventDate.getMonth() === month && eventDate.getFullYear() === year;
-        });
         const date = day ? new Date(year, month, day) : new Date(1970, 0, 1);
+        const eventsForDay = events.filter((event) => compareTwoDates(event.date, date));
+        const weekDay = weekDays[weekDayIndex];
+        const isToday = compareTwoDates(new Date(), date);
+        const publicHolidaysForDay = publicHolidays
+            .filter((publicHoliday) => compareTwoDates(new Date(publicHoliday.date), date))
+            .map((publicHoliday) => ({
+                id: publicHoliday.name,
+                title: publicHoliday.name,
+                description: publicHoliday.localName || publicHoliday.name,
+                date: new Date(publicHoliday.date),
+                labels: [],
+            }));
         return {
             day,
             date,
-            weekDay: weekDays[weekDayIndex],
+            weekDay,
             weekDayIndex,
-            isWeekend: weekDayIndex === 5 || weekDayIndex === 6,
-            isToday:
-                day === new Date().getDate() && month === new Date().getMonth() && year === new Date().getFullYear(),
+            isToday,
+            isWeekend: isWeekend(weekDayIndex),
             events: eventsForDay,
             publicHolidays: publicHolidaysForDay,
         };
@@ -91,4 +92,4 @@ const getMonthName = (month: number) => {
     return new Date(0, month).toLocaleString('en-US', { month: 'long' });
 };
 
-export { getMonthDays, getDaysByWeekArray, getDays, generateEventUid, getMonthName };
+export { getMonthDays, getDaysByWeekArray, getDays, generateEventUid, getMonthName, isWeekend };

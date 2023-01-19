@@ -1,10 +1,11 @@
 import React from 'react';
 import { Draggable } from 'react-beautiful-dnd';
 import Chip from '@mui/material/Chip';
+import { StyledEvent } from '../common';
+import { EventInfo } from './index';
+
 import { Event as IEvent } from '../../constants';
 import { useModal } from '../../context/modal-context';
-import { EventInfo } from './EventInfo';
-import { StyledEvent } from '../common';
 
 interface EventProps {
     index: number;

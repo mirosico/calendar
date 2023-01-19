@@ -1,23 +1,24 @@
 import { useState } from 'react';
 import { useEvents, useDays, useFilters, usePublicHolidays } from './index';
+import { MonthYear } from '../constants';
 
 export const useCalendar = () => {
-    const [month, setMonth] = useState(new Date().getMonth());
-    const [year, setYear] = useState(new Date().getFullYear());
+    const [currentMonthYear, setCurrentMonthYear] = useState<MonthYear>({
+        month: new Date().getMonth(),
+        year: new Date().getFullYear(),
+    });
 
-    const publicHolidays = usePublicHolidays(year, month);
+    const publicHolidays = usePublicHolidays(currentMonthYear);
 
     const { events, addEvent, exportEventsToJSON, importEventsFromJSON } = useEvents();
 
-    const { days, onDragDay } = useDays(month, year, publicHolidays, events);
+    const { days, onDragDay } = useDays({ currentMonthYear, publicHolidays, events });
 
     const filter = useFilters({ days });
 
     return {
-        month,
-        year,
-        setMonth,
-        setYear,
+        currentMonthYear,
+        setCurrentMonthYear,
         filter,
         addEvent,
         onDragDay,

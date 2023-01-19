@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
 import _ from 'lodash';
 import { getAvailableCountries, getPublicHolidays } from '../services';
-import { PublicHoliday } from '../constants';
+import { MonthYear, PublicHoliday } from '../constants';
 
-export const usePublicHolidays = (year: number, month: number) => {
+export const usePublicHolidays = (currentMonthYear: MonthYear) => {
     const [allPublicHoliday, setAllPublicHoliday] = useState<PublicHoliday[]>([]);
     const [publicHolidays, setPublicHolidays] = useState<PublicHoliday[]>([]);
+
+    const { month, year } = currentMonthYear;
 
     useEffect(() => {
         (async () => {
