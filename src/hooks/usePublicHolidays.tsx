@@ -4,18 +4,25 @@ import { getAvailableCountries, getPublicHolidays } from '../services';
 import { PublicHoliday } from '../constants';
 
 export const usePublicHolidays = (year: number, month: number) => {
+    const [allPublicHoliday, setAllPublicHoliday] = useState<PublicHoliday[]>([]);
     const [publicHolidays, setPublicHolidays] = useState<PublicHoliday[]>([]);
 
     useEffect(() => {
         (async () => {
             const allPublicHolidays: PublicHoliday[] = await getAllPublicHolidays(year);
-            const filteredPublicHolidays = allPublicHolidays.filter(
+            setAllPublicHoliday(allPublicHolidays);
+        })();
+    }, [year]);
+
+    useEffect(() => {
+        (async () => {
+            const filteredPublicHolidays = allPublicHoliday.filter(
                 (holiday) => new Date(holiday.date).getMonth() === month,
             );
             const uniqueHolidayDates = _.uniqBy(filteredPublicHolidays, 'name');
             setPublicHolidays(uniqueHolidayDates);
         })();
-    }, [year, month]);
+    }, [allPublicHoliday, month]);
 
     const getAllCountries = async (): Promise<string[]> => {
         const response = await getAvailableCountries();

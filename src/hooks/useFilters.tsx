@@ -37,7 +37,7 @@ export const useFilters = ({ days }: FilterProps) => {
                     });
                 });
             }
-            return checkBoxesArray;
+            return checkBoxesArray.sort((a, b) => a.name.localeCompare(b.name));
         },
         [days],
     );
